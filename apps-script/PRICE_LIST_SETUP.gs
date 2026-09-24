@@ -1,0 +1,31 @@
+/**
+ * AR Studio — Price List Seeder
+ * Tempel file ini ke project Google Apps Script backend AR Studio Anda,
+ * lalu jalankan seedARStudioPrices() satu kali.
+ *
+ * Script ini hanya membuat / memperbarui sheet "Prices" dan tidak
+ * mengubah sheet lain.
+ */
+function seedARStudioPrices() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheetName = 'Prices';
+  let sh = ss.getSheetByName(sheetName);
+  if (!sh) sh = ss.insertSheet(sheetName);
+
+  const headers = ['id', 'service', 'price', 'unit', 'features', 'description', 'details', 'notes', 'active', 'sort'];
+  const rows = [
+    ['overdub-recording','Overdub Recording','Rp150.000','/ jam','Rp360.000 / 1/2 shift (3 jam)|Rp600.000 / shift (5 jam)','Layanan overdub recording untuk vocal maupun instrumen dengan pilihan durasi per jam, setengah shift, atau full shift.','Rp150.000 / jam|Rp360.000 / 1/2 shift (3 jam)|Rp600.000 / shift (5 jam)','Booking melalui WhatsApp: 0857-2209-6345',true,1],
+    ['aransemen-midi-instrumen','Aransemen MIDI / Instrumen','Rp850.000','mulai','No Mixing|Mixing & Mastering Basic|Take Vocal / Edit Vocal','Paket aransemen MIDI/instrumen dari produksi dasar sampai paket lengkap dengan take dan editing vocal.','Rp850.000 — Aransemen, tanpa mixing|Rp1.200.000 — Aransemen + Mixing & Mastering Basic|Rp1.600.000 — Aransemen + Take Vocal/Edit Vocal + Mixing & Mastering Basic','Detail kebutuhan aransemen dan referensi musik dapat dibahas saat booking.',true,2],
+    ['jingle','Jingle','Rp3.500.000','mulai','Aransemen musik|Pembuatan nada & lirik','Produksi jingle untuk brand, sekolah, bisnis, campaign, atau kebutuhan promosi.','Rp3.500.000 — Aransemen musik|Rp5.500.000 — Membuat nada & lirik','Brief, durasi, penggunaan komersial, dan referensi gaya musik dibahas sebelum produksi.',true,3],
+    ['paket-video-cover','Paket Video Cover','Rp800.000','/ paket','Take vocal|3 angle video indoor|Editing video|Mixing & mastering','Paket produksi video cover indoor dengan proses take vocal, multi-angle video, editing, mixing, dan mastering.','Musik / backing track disiapkan sendiri|Take vocal setengah shift (3 jam)|3 angle video indoor|Editing video|Mixing + mastering','Musik disiapkan sendiri oleh client.',true,4],
+    ['mixing','Mixing','Rp350.000','mulai','Vocal editing|Vocal tuning basic|Timing correction|EQ|Compression|Reverb & Delay|Stereo imaging|Automation|Balancing|Mix bus processing|WAV + MP3|2x revisi','Mixing multitrack lengkap dengan editing dasar, balancing, processing, automation, dan final mix.','Rp350.000 — 1–10 track|Rp500.000 — 11–20 track|Rp700.000 — 21–50 track|Rp1.000.000 — lebih dari 50 track|Vocal editing|Vocal tuning basic|Timing correction|EQ|Compression|Reverb & Delay|Stereo imaging|Automation|Vocal & instrumental balancing|Mix bus processing|Final mix WAV + MP3|2x revisi','Harga mengikuti jumlah track pada project.',true,5],
+    ['mastering','Mastering','Rp300.000–500.000','/ lagu','EQ tonal balancing|Compression|Limiting|Stereo enhancement|Loudness optimization|Dynamic control|Streaming optimization|WAV Master|MP3 Master','Finalisasi audio agar tonal balance, dinamika, loudness, dan format akhir siap untuk distribusi.','EQ tonal balancing|Compression|Limiting|Stereo enhancement|Loudness optimization|Dynamic control|Streaming optimization|WAV Master|MP3 Master','Harga Rp300.000–Rp500.000 per lagu, menyesuaikan kebutuhan materi.',true,6]
+  ];
+
+  sh.clearContents();
+  sh.getRange(1, 1, 1, headers.length).setValues([headers]);
+  sh.getRange(2, 1, rows.length, headers.length).setValues(rows);
+  sh.setFrozenRows(1);
+  sh.autoResizeColumns(1, headers.length);
+  return 'Prices updated: ' + rows.length + ' services';
+}
