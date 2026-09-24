@@ -28,7 +28,7 @@ function doGet(e) {
     const allowed = ['home', 'portfolio', 'prices', 'services', 'gallery', 'about'];
     const safeSection = allowed.indexOf(section) > -1 ? section : 'home';
     const cache = CacheService.getScriptCache();
-    const cacheKey = 'website:' + safeSection + ':v3';
+    const cacheKey = 'website:' + safeSection + ':v4';
     const cached = cache.get(cacheKey);
     if (cached) return apiOutput_({ success: true, data: JSON.parse(cached), cached: true }, e);
 
@@ -103,7 +103,7 @@ function getWebsiteData(section) {
   if (section === 'home') {
     data.services = activeSorted_(readObjects_(ss, 'Services')).slice(0, 5);
     data.audio = activeSorted_(readObjects_(ss, 'AudioPortfolio')).slice(0, 3);
-    data.videos = activeSorted_(readObjects_(ss, 'VideoPortfolio')).slice(0, 2);
+    data.videos = activeSorted_(readObjects_(ss, 'VideoPortfolio')).slice(0, 3);
     data.prices = activeSorted_(readObjects_(ss, 'PriceList')).slice(0, 5);
     data.gallery = activeSorted_(readObjects_(ss, 'Gallery')).slice(0, 6);
   } else if (section === 'portfolio') {

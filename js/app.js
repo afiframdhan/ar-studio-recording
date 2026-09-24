@@ -22,7 +22,7 @@ function safeUrl(v){var s=String(v||'');return /^(https?:\/\/)/i.test(s)?esc(s):
 function siteUrl(path){var base=window.location.origin+BASE_PATH;return base+String(path||'').replace(/^\//,'')}
 function accentLast(text){var w=esc(text).split(' ');if(w.length)w[w.length-1]='<span>'+w[w.length-1]+'</span>';return w.join(' ')}
 function setText(sel,v){var e=one(sel);if(e)e.textContent=v||''}
-function cacheKey(){return 'arStudioData:v3:'+PAGE}
+function cacheKey(){return 'arStudioData:v4:'+PAGE}
 function readCache(){try{var x=JSON.parse(localStorage.getItem(cacheKey())||'null');if(!x||!x.ts||!x.data)return null;return x}catch(e){return null}}
 function writeCache(data){try{localStorage.setItem(cacheKey(),JSON.stringify({ts:Date.now(),data:data}))}catch(e){}}
 function cacheFresh(c){return c&&(Date.now()-c.ts)<CACHE_MINUTES*60000}
